@@ -9,16 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.viniciusrezende.todosimple.repositories.UserRepositores;
 import com.viniciusrezende.todosimple.models.User;
-import com.viniciusrezende.todosimple.repositories.TaskRepositores;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepositores userRepositores;
-
-    @Autowired
-    private TaskRepositores taskRepositores;
 
     public User findById(Long id) {
         Optional<User> user = this.userRepositores.findById(id);
@@ -30,7 +26,7 @@ public class UserService {
     public User create(User obj) {
         obj.setId(null);
         obj = this.userRepositores.save(obj);
-        this.taskRepositores.saveAll(obj.getTasks());
+
         return obj;
     }
 
