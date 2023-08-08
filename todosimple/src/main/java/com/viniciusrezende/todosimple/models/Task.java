@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-
 @Entity
 @Table(name = Task.TABLE_NAME)
 public class Task {
@@ -34,7 +33,21 @@ public class Task {
     @NotBlank
     private String description;
 
+    @Column(name = "status", length = 20, nullable = false)
+    @Size(min = 1, max = 20)
+    @NotNull
+    @NotBlank
+    private String status;
+
     public Task() {
+    }
+
+    public String getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Task(Long id, User user, String description) {
@@ -110,6 +123,5 @@ public class Task {
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         return result;
     }
-
 
 }
