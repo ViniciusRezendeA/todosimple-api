@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.viniciusrezende.todosimple.models.User;
 
 @Repository
-public interface UserRepositores  extends JpaRepository<User,Long>{
+public interface UserRepository  extends JpaRepository<User,Long>{
     
 }

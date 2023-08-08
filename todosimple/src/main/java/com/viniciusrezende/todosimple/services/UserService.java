@@ -7,14 +7,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.viniciusrezende.todosimple.repositories.UserRepositores;
+import com.viniciusrezende.todosimple.repositories.UserRepository;
 import com.viniciusrezende.todosimple.models.User;
 
 @Service
 public class UserService {
 
     @Autowired
-    private UserRepositores userRepositores;
+    private UserRepository userRepositores;
 
     public User findById(Long id) {
         Optional<User> user = this.userRepositores.findById(id);

@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.viniciusrezende.todosimple.models.Task;
 import com.viniciusrezende.todosimple.models.User;
-import com.viniciusrezende.todosimple.repositories.TaskRepositores;
+import com.viniciusrezende.todosimple.repositories.TaskRepository;
 
 @Service
 public class TaskService {
 
     @Autowired
-    private TaskRepositores taskRepositores;
+    private TaskRepository taskRepositores;
 
     @Autowired
     private UserService userService;
