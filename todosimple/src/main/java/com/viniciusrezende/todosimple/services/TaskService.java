@@ -1,6 +1,7 @@
 package com.viniciusrezende.todosimple.services;
 
 import java.util.Optional;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -25,7 +26,10 @@ public class TaskService {
         return task.orElseThrow(() -> new RuntimeException(
                 "Tarefa não encontrado Id:" + id + "Tipo:" + Task.class.getName()));
     }
-
+    public List<Task> findAllByUserId(Long userId){
+        List<Task> tasks = this.taskRepositores.findByUser_Id(userId);
+        return tasks;
+    }
     @Transactional
     public Task create(Task obj) {
         User user = this.userService.findById(obj.getUser().getId());
