@@ -19,13 +19,18 @@ public class UserService {
     public User findById(Long id) {
         Optional<User> user = this.userRepositores.findById(id);
         return user.orElseThrow(() -> new RuntimeException(
-                "Usuario não encontrado Id:" + id + "Tipo:" + User.class.getName()));
+                "Usuario não encontrado Id: " + id + " Tipo: " + User.class.getName()));
     }
 
     @Transactional
     public User create(User obj) {
         obj.setId(null);
-        obj = this.userRepositores.save(obj);
+        try {
+            obj = this.userRepositores.save(obj);
+        } catch (Exception e) {
+            throw new RuntimeException("Não e possivel cadastrar dois usuarios iguais!");
+
+        }
 
         return obj;
     }
