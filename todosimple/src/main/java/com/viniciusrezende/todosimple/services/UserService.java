@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.viniciusrezende.todosimple.repositories.UserRepository;
+import com.viniciusrezende.todosimple.services.exceptions.DataBindingViolationExcetion;
+import com.viniciusrezende.todosimple.services.exceptions.ObjectNotFoundException;
 import com.viniciusrezende.todosimple.models.User;
 
 @Service
@@ -18,19 +20,14 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> user = this.userRepositores.findById(id);
-        return user.orElseThrow(() -> new RuntimeException(
+        return user.orElseThrow(() -> new ObjectNotFoundException(
                 "Usuario não encontrado Id: " + id + " Tipo: " + User.class.getName()));
     }
 
     @Transactional
     public User create(User obj) {
         obj.setId(null);
-        try {
-            obj = this.userRepositores.save(obj);
-        } catch (Exception e) {
-            throw new RuntimeException("Não e possivel cadastrar dois usuarios iguais!");
-
-        }
+        obj = this.userRepositores.save(obj);
 
         return obj;
     }
@@ -48,7 +45,7 @@ public class UserService {
             this.userRepositores.delete(obj);
 
         } catch (Exception e) {
-            throw new RuntimeException("Não e possivel excluir pois há entidades relacionada!");
+            throw new DataBindingViolationExcetion("Não e possivel excluir pois há entidades relacionada!");
         }
     }
 }
